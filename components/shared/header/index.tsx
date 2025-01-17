@@ -2,7 +2,7 @@ import { ShoppingCart, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { APP_NAME } from "@/lib/constants";
-import { ShoppingBagIcon } from "@/images/shopping-bags";
+import { ShoppingBagIcon } from "@/assets/images/shopping-bags";
 import ModeToggle from "./mode-toggle";
 
 const Header = () => {
