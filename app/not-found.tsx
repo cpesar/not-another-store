@@ -3,7 +3,7 @@
 // import Image from "next/image";
 import { Button } from "@/components/ui/button";
 // import { Logo } from "@/images/logo";
-import { ShoppingBagIcon } from "@/assets/images/shopping-bags";
+import { ShoppingBagIcon } from "@/public/images/shopping-bags";
 
 const NotFoundPage = () => {
   return (
