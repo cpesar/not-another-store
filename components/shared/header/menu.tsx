@@ -17,12 +17,14 @@ const Menu = () => {
         <ModeToggle />
         <Button asChild variant="ghost">
           <Link href="/cart">
-            <ShoppingCart /> Cart
+            <ShoppingCart />
+            Cart
           </Link>
         </Button>
         <Button asChild>
           <Link href="/sign-in">
-            <UserIcon /> Sign In
+            <UserIcon />
+            Sign In
           </Link>
         </Button>
       </nav>
@@ -36,12 +38,14 @@ const Menu = () => {
             <ModeToggle />
             <Button asChild variant="ghost">
               <Link href="/cart">
-                <ShoppingCart /> Cart
+                <ShoppingCart />
+                Cart
               </Link>
             </Button>
             <Button asChild>
               <Link href="/sign-in">
-                <UserIcon /> Sign In
+                <UserIcon />
+                Sign In
               </Link>
             </Button>
             <SheetDescription></SheetDescription>
