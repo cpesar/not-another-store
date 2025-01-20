@@ -100,7 +100,7 @@ export const config = {
             headers: newRequestHeaders,
           },
         });
-        //set newly generated session cart id cookie in the response cookies
+        //set newly generated sessionCartId cookie in the response cookies
         response.cookies.set("sessionCartId", sessionCartId);
 
         return response;
