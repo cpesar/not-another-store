@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  // configuration to use adapater
+  // configuration to use adapaters
   previewFeatures = ["driverAdapters"]
 }
 
