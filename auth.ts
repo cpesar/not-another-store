@@ -3,10 +3,10 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/db/prisma";
 import { adapter } from "next/dist/server/web/adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { compareSync } from "bcrypt-ts-edge";
 import type { NextAuthConfig } from "next-auth";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { compare } from "./lib/encrypt";
 
 export const config = {
   pages: {
@@ -19,6 +19,7 @@ export const config = {
   },
   adapter: PrismaAdapter(prisma),
 
+  // is this where i could use GoogleProvider?
   providers: [
     CredentialsProvider({
       credentials: {
@@ -36,7 +37,7 @@ export const config = {
         });
         //check if user exists and password matches
         if (user && user.password) {
-          const isMatch = compareSync(
+          const isMatch = await compare(
             credentials.password as string,
             user.password
           );
