@@ -91,7 +91,7 @@ export async function getMyCart() {
     where: userId ? { userId: userId } : { sessionCartId: sessionCartId },
   });
   if (!cart) return undefined;
-  //convert deciamals and return
+  //Convert deciamals and return
   return convertToPlainObject({
     ...cart,
     items: cart.items as CartItem[],
