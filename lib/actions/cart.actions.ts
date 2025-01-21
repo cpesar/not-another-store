@@ -25,7 +25,7 @@ const calcPrice = (items: CartItem[]) => {
   };
 };
 
-export const addItemToCart = async (data: CartItem) => {
+export async function addItemToCart(data: CartItem) {
   try {
     // check for cart cookie
     const sessionCartId = (await cookies()).get("sessionCartId")?.value;
@@ -55,24 +55,17 @@ export const addItemToCart = async (data: CartItem) => {
       });
       console.log(newCart);
 
-      // Add to db
+      //   Add to db
       await prisma.cart.create({
         data: newCart,
       });
       // revalidate product page
       revalidatePath(`/product/${product.slug}`);
-
-      //   console.log({
-      //     "Session Cart id": sessionCartId,
-      //     "User id": userid,
-      //     "Item requested": item,
-      //     "Product found": product,
-      //   });
-      return {
-        success: true,
-        message: `${product.name} added to cart`,
-      };
     }
+    return {
+      success: true,
+      message: `${product.name} added to cart`,
+    };
   } catch (error) {
     return {
       success: false,
@@ -80,7 +73,7 @@ export const addItemToCart = async (data: CartItem) => {
       //   message: "Error adding item to cart",
     };
   }
-};
+}
 
 export async function getMyCart() {
   // check for cart cookie
@@ -89,13 +82,13 @@ export async function getMyCart() {
 
   //get session and userid from sessionCartId
   const session = await auth();
-  const userid = session?.user?.id ? (session.user.id as string) : undefined;
+  const userId = session?.user?.id ? (session.user.id as string) : undefined;
 
   // get user cart from db
   const cart = await prisma.cart.findFirst({
     // Check if the user is logged in or not ELSE, get the cart by sessionCartId
     // Allows guests to still be able to add items to their cart
-    where: userid ? { userId: userid } : { sessionCartId: sessionCartId },
+    where: userId ? { userId: userId } : { sessionCartId: sessionCartId },
   });
   if (!cart) return undefined;
   //convert deciamals and return
