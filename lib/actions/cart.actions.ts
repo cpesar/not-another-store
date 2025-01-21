@@ -27,11 +27,11 @@ const calcPrice = (items: CartItem[]) => {
 
 export async function addItemToCart(data: CartItem) {
   try {
-    // check for cart cookie
+    // Check for cart cookie
     const sessionCartId = (await cookies()).get("sessionCartId")?.value;
     if (!sessionCartId) throw new Error("cart session not found");
 
-    //get session and userid from sessionCartId
+    //Get session and userid from sessionCartId
     const session = await auth();
     const userId = session?.user?.id ? (session.user.id as string) : undefined;
 
@@ -59,7 +59,7 @@ export async function addItemToCart(data: CartItem) {
       await prisma.cart.create({
         data: newCart,
       });
-      // revalidate product page
+      // Revalidate product page
       revalidatePath(`/product/${product.slug}`);
     } else {
     }
@@ -76,15 +76,15 @@ export async function addItemToCart(data: CartItem) {
 }
 
 export async function getMyCart() {
-  // check for cart cookie
+  // Check for cart cookie
   const sessionCartId = (await cookies()).get("sessionCartId")?.value;
   if (!sessionCartId) throw new Error("cart session not found");
 
-  //get session and userid from sessionCartId
+  //Get session and userid from sessionCartId
   const session = await auth();
   const userId = session?.user?.id ? (session.user.id as string) : undefined;
 
-  // get user cart from db
+  // Get user cart from db
   const cart = await prisma.cart.findFirst({
     // Check if the user is logged in or not ELSE, get the cart by sessionCartId
     // Allows guests to still be able to add items to their cart
