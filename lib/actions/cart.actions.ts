@@ -61,6 +61,7 @@ export async function addItemToCart(data: CartItem) {
       });
       // revalidate product page
       revalidatePath(`/product/${product.slug}`);
+    } else {
     }
     return {
       success: true,
@@ -70,7 +71,6 @@ export async function addItemToCart(data: CartItem) {
     return {
       success: false,
       message: formatError(error),
-      //   message: "Error adding item to cart",
     };
   }
 }
