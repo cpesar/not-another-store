@@ -1,3 +1,5 @@
+import { count } from "console";
+
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || "Not Another Store";
 export const APP_DESCRIPTION =
   process.env.NEXT_PUBLIC_APP_DESCRIPTION ||
@@ -17,4 +19,13 @@ export const signUpDefaultValues = {
   email: "",
   password: "",
   confirmPassword: "",
+};
+
+// Remove these values before deploying
+export const shippingAddressDefaultValues = {
+  fullName: "",
+  streetAddress: "",
+  city: "",
+  postalCode: "",
+  country: "",
 };

@@ -13,6 +13,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(SERVER_URL),
 };
 
+// export const metadata: Metadata = {
+//   title: {
+//     template: `%s | Not Another Store`,
+//     default: APP_NAME,
+//   },
+//   description: APP_DESCRIPTION,
+//   metadataBase: new URL(SERVER_URL),
+// };
+
 export default function RootLayout({
   children,
 }: Readonly<{
