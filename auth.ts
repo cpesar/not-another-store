@@ -111,8 +111,26 @@ export const config = {
       return token;
     },
     authorized({ request, auth }: any) {
-      // check for session cart cookie
+      // Array of regex patterns to protect
+      const protectPaths = [
+        /\/shipping-address/,
+        /\/payment-method/,
+        /\/place-order/,
+        /\/profile/,
+        /\/user\/(.*)/,
+        /\/order\/(.*)/,
+        /\/admin/,
+      ];
+
+      // Get the pathname from the request URL object (the page currently being accessed)
+      const { pathname } = request.nextUrl;
+      // Check if user is not authenticated and is accessing a protected path
+      if (!auth && protectPaths.some((p) => p.test(pathname))) {
+        return false;
+      }
+
       if (!request.cookies.get("sessionCartId")) {
+        // check for session cart cookie
         //generate new session id cart cookie
         const sessionCartId = crypto.randomUUID();
         //clone new request headers
