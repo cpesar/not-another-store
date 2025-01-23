@@ -34,7 +34,7 @@ const OrderDetailsTable = ({ order }: { order: Order }) => {
   } = order;
   return (
     <>
-      <h1 className="py-4 text-2xl">{formatId(id)}</h1>
+      {/* <h1 className="py-4 text-2xl">{formatId(id)}</h1> */}
       <div className="grid md:grid-cols-3 md:gap-5">
         <div className="col-span-2 space-4-y overflow-x-auto">
           <Card>
