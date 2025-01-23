@@ -4,10 +4,6 @@ import { prisma } from "@/db/prisma";
 import { cookies } from "next/headers";
 import { compare } from "./lib/encrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
-// import { PrismaAdapter } from "@auth/prisma-adapter";
-// import { adapter } from "next/dist/server/web/adapter";
-// import type { NextAuthConfig } from "next-auth";
-// import { NextResponse } from "next/server";
 
 export const config = {
   pages: {
@@ -18,7 +14,6 @@ export const config = {
     strategy: "jwt" as const,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  // adapter: PrismaAdapter(prisma),
 
   // is this where i could use GoogleProvider?
   providers: [
