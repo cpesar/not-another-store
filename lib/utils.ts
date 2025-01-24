@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+// Display classes that exist ALL of the time
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
