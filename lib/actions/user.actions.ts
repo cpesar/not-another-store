@@ -140,10 +140,7 @@ export async function updateUsersPaymentMethod(
 }
 
 // update the user profile
-export async function updateProfileSchema(user: {
-  name: string;
-  email: string;
-}) {
+export async function updateProfile(user: { name: string; email: string }) {
   try {
     const session = await auth();
 
