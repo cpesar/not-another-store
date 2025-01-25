@@ -19,6 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
+import { TiShoppingCart } from "react-icons/ti";
 
 const CartTable = ({ cart }: { cart?: Cart }) => {
   const router = useRouter();
@@ -27,10 +28,30 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 
   return (
     <>
-      <div className="h1 py-4 h2-bold">Shopping Cart</div>
+      {/* <div className="flex flex-col h1 py-4 h2-bold items-center">
+        Shopping Cart
+      </div> */}
       {!cart || cart.items.length === 0 ? (
-        <div>
-          Cart is empty. <Link href="/">Go Shopping</Link>
+        <div className="flex flex-col items-center gap-4 mt-40 py-8 text-center">
+          Cart is empty. Go shopping!
+          <Link href="/">
+            <TiShoppingCart
+              size={80}
+              // color="#ffc2c2"
+              // fill="#99ecff"
+              color="yellow"
+              style={{
+                cursor: "pointer",
+
+                // color: "3383ff",
+                // color: "33e0ff",
+                // color: "33ffe9",
+                // color: "33f6ff",
+                // color: "#89F1FF",
+                color: "fdc1c5",
+              }}
+            />
+          </Link>
         </div>
       ) : (
         <div className="grid md:grid-cols-4 md:gap-5">
