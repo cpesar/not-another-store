@@ -12,6 +12,7 @@ import { formatError } from "../utils";
 import { hash } from "../encrypt";
 import { ShippingAddress } from "@/types";
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
 
 // Sign in the user with credentials
 export async function signInWithCredentials(
