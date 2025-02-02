@@ -13,12 +13,12 @@ import {
 } from "@/components/ui/table";
 import Pagination from "@/components/shared/pagination";
 
-const AdminProeuctsPage = async (props: {
-  searchParams: {
+const AdminProductsPage = async (props: {
+  searchParams: Promise<{
     page: string;
     query: string;
     category: string;
-  };
+  }>;
 }) => {
   const searchParams = await props.searchParams;
 
@@ -82,4 +82,4 @@ const AdminProeuctsPage = async (props: {
   );
 };
 
-export default AdminProeuctsPage;
+export default AdminProductsPage;
