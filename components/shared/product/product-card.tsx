@@ -5,17 +5,24 @@ import ProductPrice from "./product-price";
 import { Product } from "@/types";
 
 const ProductCard = ({ product }: { product: Product }) => {
+  const imageUrl = product.images?.[0] || null;
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="p-0 items-center">
         <Link href={`/product/${product.slug}`}>
-          <Image
-            src={product.images[0]}
-            alt={product.name}
-            height={300}
-            width={300}
-            priority={true}
-          />
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={product.name}
+              height={300}
+              width={300}
+              priority={true}
+            />
+          ) : (
+            <div className="h-[300px] w-[300px] bg-gray-200 flex-center">
+              No image available
+            </div>
+          )}
         </Link>
       </CardHeader>
 
