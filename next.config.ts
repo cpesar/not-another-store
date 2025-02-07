@@ -1,8 +1,17 @@
 import type { NextConfig } from "next";
-import { hostname } from "os";
 
 const nextConfig: NextConfig = {
-  image: {
+  // images: {
+  //   remotePatterns: [
+  //     {
+  //       protocol: "https",
+  //       hostname: "utfs.io",
+  //       port: "",
+  //     },
+  //   ],
+  // },
+  images: {
+    domains: ["utfs.io"],
     remotePatterns: [
       {
         protocol: "https",
