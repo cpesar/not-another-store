@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   title: `${APP_NAME}`,
   description: `${APP_DESCRIPTION}`,
   metadataBase: new URL(SERVER_URL),
+  icons: {
+    // icon: "/favicon.ico",
+    // icon: [{ url: "./favicon.ico" }, { url: "/favicon.ico" }],
+    icon: [
+      { rel: "icon", url: "/favicon.ico", sizes: "any" },
+      { rel: "icon", url: "/favicon.ico", type: "image/x-icon" },
+    ],
+  },
 };
 
 // export const metadata: Metadata = {
@@ -29,6 +37,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={`${inter.className}  antialiased`}>
         <ThemeProvider
           attribute="class"
