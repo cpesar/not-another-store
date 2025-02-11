@@ -1,5 +1,4 @@
 "use client";
-
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
 const Charts = ({
@@ -8,7 +7,7 @@ const Charts = ({
   data: { salesData: { month: string; totalSales: number }[] };
 }) => {
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={350}>
       <BarChart data={salesData}>
         <XAxis
           dataKey="month"
