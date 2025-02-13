@@ -2,6 +2,7 @@ import { z } from "zod";
 import { formatNumberWithDecimal } from "./utils";
 import { PAYMENT_METHODS } from "./constants";
 import { stat } from "fs";
+import exp from "constants";
 
 const currency = z
   .string()
@@ -128,4 +129,10 @@ export const paymentResultSchema = z.object({
 export const updateProfileSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters long"),
   email: z.string().min(3, "Invalid email address"),
+});
+
+// Schema to update users
+export const updateUserSchema = updateProfileSchema.extend({
+  id: z.string().min(1, "User id is required"),
+  role: z.string().min(1, "Role is required"),
 });

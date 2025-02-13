@@ -76,7 +76,7 @@ const AdminProductsPage = async (props: {
         </TableBody>
       </Table>
       {products.totalPages > 1 && (
-        <Pagination page={page} totalPages={products.totalPages}></Pagination>
+        <Pagination page={page} totalPages={products?.totalPages}></Pagination>
       )}
     </div>
   );
