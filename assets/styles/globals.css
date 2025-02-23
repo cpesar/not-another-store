@@ -104,8 +104,6 @@ html.dark .upload-field .text-white {
   font-size: medium;
 }
 
-
-
 @layer base {
   * {
     @apply border-border outline-ring/50;

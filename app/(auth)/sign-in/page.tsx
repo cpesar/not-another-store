@@ -38,6 +38,7 @@ const SignInPage = async (props: {
             <ShoppingBagIcon width={100} height={100} />
           </Link>
           <CardTitle className="text-center">Sign In</CardTitle>
+
           <CardDescription className="text-center">
             Sign in to your account
           </CardDescription>
