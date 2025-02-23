@@ -4,6 +4,10 @@ import { prisma } from "@/db/prisma";
 import { cookies } from "next/headers";
 import { compare } from "./lib/encrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 export const config = {
   pages: {
@@ -51,6 +55,10 @@ export const config = {
         return null;
       },
     }),
+    GoogleProvider({
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+    }),
   ],
 
   callbacks: {
@@ -67,6 +75,25 @@ export const config = {
         session.user.name = user.name;
       }
       return session;
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async signIn({ account, profile }: any) {
+      if (!profile.email) {
+        throw new Error("No profile");
+      }
+      await prisma.user.upsert({
+        where: {
+          email: profile.email,
+        },
+        create: {
+          email: profile.email,
+          name: profile.name,
+        },
+        update: {
+          name: profile.name,
+        },
+      });
+      return true;
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async jwt({ token, user, session, trigger }: any) {
