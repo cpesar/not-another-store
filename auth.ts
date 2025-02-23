@@ -12,14 +12,13 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 export const config = {
   pages: {
     signIn: "/sign-in",
-    error: '"sign-in',
+    error: '"/sign-in',
   },
   session: {
     strategy: "jwt" as const,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
 
-  // is this where i could use GoogleProvider?
   providers: [
     CredentialsProvider({
       credentials: {
