@@ -103,3 +103,14 @@ html.dark .upload-field .text-white {
   color: #000 !important;
   font-size: medium;
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
