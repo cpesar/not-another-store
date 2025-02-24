@@ -41,7 +41,6 @@ const OrderDetailsTable = ({
   isAdmin: boolean;
   stripeClientSecret: string | null;
 }) => {
-  // Destructure fields from order object
   const {
     id,
     shippingAddress,

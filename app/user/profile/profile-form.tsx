@@ -14,7 +14,6 @@ import { updateProfile } from "@/lib/actions/user.actions";
 import { updateProfileSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
-import { use } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -50,7 +49,6 @@ const ProfileForm = () => {
     await update(newSession);
 
     toast({
-      //   variant: "default",
       description: res.message,
     });
   };
@@ -71,7 +69,6 @@ const ProfileForm = () => {
                 <FormItem className="w-full">
                   <FormControl>
                     <Input
-                      //   disabled
                       placeholder="Name"
                       className="input-field"
                       {...field}
@@ -98,23 +95,7 @@ const ProfileForm = () => {
                 </FormItem>
               )}
             />
-            {/* <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormControl>
-                    <Input
-                      disabled
-                      placeholder="Email"
-                      className="input-field"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
+
             <Button
               type="submit"
               size="lg"

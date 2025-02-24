@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
-import { startTransition, useTransition } from "react";
+import { useTransition } from "react";
 import { paymentMethodSchema } from "@/lib/validators";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -41,7 +41,6 @@ const PaymentMethodForm = ({
   const onSubmit = async (values: z.infer<typeof paymentMethodSchema>) => {
     startTransition(async () => {
       const res = await updateUsersPaymentMethod(values);
-      //   console.log(res, "res");
 
       if (!res.success) {
         toast({
@@ -53,8 +52,6 @@ const PaymentMethodForm = ({
       router.push("/place-order");
     });
   };
-
-  //   console.log(PAYMENT_METHODS, "PAYMENT_METHODS");
 
   return (
     <>

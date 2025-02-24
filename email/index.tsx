@@ -14,10 +14,4 @@ export const sendPurchaseReceipt = async ({ order }: { order: Order }) => {
     subject: `Order Confirmation #${order.id}`,
     react: <PurchaseReceiptEmail order={order} />,
   });
-
-  //   if (error) {
-  //     return res.status(400).json(error);
-  //   }
-
-  //   res.status(200).json(data);
 };

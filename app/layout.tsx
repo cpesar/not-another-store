@@ -12,23 +12,12 @@ export const metadata: Metadata = {
   description: `${APP_DESCRIPTION}`,
   metadataBase: new URL(SERVER_URL),
   icons: {
-    // icon: "/favicon.ico",
-    // icon: [{ url: "./favicon.ico" }, { url: "/favicon.ico" }],
     icon: [
       { rel: "icon", url: "/favicon.ico", sizes: "any" },
       { rel: "icon", url: "/favicon.ico", type: "image/x-icon" },
     ],
   },
 };
-
-// export const metadata: Metadata = {
-//   title: {
-//     template: `%s | Not Another Store`,
-//     default: APP_NAME,
-//   },
-//   description: APP_DESCRIPTION,
-//   metadataBase: new URL(SERVER_URL),
-// };
 
 export default function RootLayout({
   children,
