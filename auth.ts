@@ -12,7 +12,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 export const config = {
   pages: {
     signIn: "/sign-in",
-    error: '"/sign-in',
+    error: "/sign-in",
   },
   session: {
     strategy: "jwt" as const,
