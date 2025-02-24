@@ -20,6 +20,8 @@ const CredentialsSignInForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
+  console.log("callbackUrl:", callbackUrl);
+
   const SignInButton = () => {
     const { pending } = useFormStatus();
 
@@ -81,7 +83,12 @@ const CredentialsSignInForm = () => {
       <Button
         variant="outline"
         className="w-full"
-        onClick={() => signIn("google", { callbackUrl })}
+        // onClick={() => signIn("google", { callbackUrl })}
+        onClick={() =>
+          signIn("google", {
+            callbackUrl: window.location.origin,
+          })
+        }
       >
         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
           <path
