@@ -5,12 +5,20 @@ import { cookies } from "next/headers";
 import { compare } from "./lib/encrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
   throw new Error("Missing Google OAuth Credentials");
+}
+
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const GITHUB_SECRET = process.env.GITHUB_SECRET;
+
+if (!GITHUB_CLIENT_ID || !GITHUB_SECRET) {
+  throw new Error("Missing GitHub OAuth Credentials");
 }
 
 export const config = {
@@ -23,6 +31,10 @@ export const config = {
           prompt: "select_account",
         },
       },
+    }),
+    GitHubProvider({
+      clientId: GITHUB_CLIENT_ID,
+      clientSecret: GITHUB_SECRET,
     }),
     CredentialsProvider({
       credentials: {
