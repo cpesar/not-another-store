@@ -9,17 +9,21 @@ import GoogleProvider from "next-auth/providers/google";
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
-export const config = {
-  pages: {
-    signIn: "/sign-in",
-    error: "/sign-in",
-  },
-  session: {
-    strategy: "jwt" as const,
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
+if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
+  throw new Error("Missing Google OAuth Credentials");
+}
 
+export const config = {
   providers: [
+    GoogleProvider({
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "select_account",
+        },
+      },
+    }),
     CredentialsProvider({
       credentials: {
         email: { type: "email" },
@@ -54,20 +58,17 @@ export const config = {
         return null;
       },
     }),
-    // GoogleProvider({
-    //   clientId: GOOGLE_CLIENT_ID,
-    //   clientSecret: GOOGLE_CLIENT_SECRET,
-    // }),
-    GoogleProvider({
-      clientId: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-      authorization: {
-        params: {
-          prompt: "select_account",
-        },
-      },
-    }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+
+  pages: {
+    signIn: "/sign-in",
+    error: "/sign-in",
+  },
+  session: {
+    strategy: "jwt" as const,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
 
   callbacks: {
     ...authConfig.callbacks,
@@ -86,23 +87,27 @@ export const config = {
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async signIn({ account, profile }: any) {
-      if (!profile.email) {
-        throw new Error("No profile");
+      if (account?.provider === "google") {
+        if (!profile?.email) {
+          throw new Error("No profile");
+        }
+
+        // Create or update user in your database
+        await prisma.user.upsert({
+          where: { email: profile.email },
+          create: {
+            email: profile.email,
+            name: profile.name || "NO_NAME",
+          },
+          update: {
+            name: profile.name || "NO_NAME",
+          },
+        });
+        return true;
       }
-      await prisma.user.upsert({
-        where: {
-          email: profile.email,
-        },
-        create: {
-          email: profile.email,
-          name: profile.name,
-        },
-        update: {
-          name: profile.name,
-        },
-      });
-      return true;
+      return true; // Do different verification for other providers that don't have `email_verified`
     },
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async redirect({ url, baseUrl }: any) {
       // Allows relative callback URLs

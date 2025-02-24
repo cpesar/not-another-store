@@ -20,9 +20,14 @@ export const metadata: Metadata = {
 const SignInPage = async (props: {
   searchParams: Promise<{
     callbackUrl: string;
+    error?: string;
   }>;
 }) => {
-  const { callbackUrl } = await props.searchParams;
+  const { callbackUrl, error } = await props.searchParams;
+
+  if (error) {
+    console.error("Auth error:", error);
+  }
 
   const session = await auth();
 
@@ -42,6 +47,11 @@ const SignInPage = async (props: {
           <CardDescription className="text-center">
             Sign in to your account
           </CardDescription>
+          {error && (
+            <div className="text-red-500 text-center">
+              Authentication error: {error}
+            </div>
+          )}
         </CardHeader>
         <CardContent className="space-y-4">
           <CredentialsSignInForm />
