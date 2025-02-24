@@ -54,9 +54,18 @@ export const config = {
         return null;
       },
     }),
+    // GoogleProvider({
+    //   clientId: GOOGLE_CLIENT_ID,
+    //   clientSecret: GOOGLE_CLIENT_SECRET,
+    // }),
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "select_account",
+        },
+      },
     }),
   ],
 
@@ -93,6 +102,14 @@ export const config = {
         },
       });
       return true;
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async redirect({ url, baseUrl }: any) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async jwt({ token, user, session, trigger }: any) {

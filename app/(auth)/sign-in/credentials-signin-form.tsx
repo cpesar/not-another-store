@@ -20,7 +20,18 @@ const CredentialsSignInForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
-  console.log("callbackUrl:", callbackUrl);
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signIn("google", {
+        callbackUrl: "https://not-another-store.vercel.app",
+        redirect: true,
+      });
+
+      console.log("Sign in result:", result);
+    } catch (error) {
+      console.error("Google sign in error:", error);
+    }
+  };
 
   const SignInButton = () => {
     const { pending } = useFormStatus();
@@ -84,11 +95,7 @@ const CredentialsSignInForm = () => {
         variant="outline"
         className="w-full"
         // onClick={() => signIn("google", { callbackUrl })}
-        onClick={() =>
-          signIn("google", {
-            callbackUrl: window.location.origin,
-          })
-        }
+        onClick={handleGoogleSignIn}
       >
         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
           <path
