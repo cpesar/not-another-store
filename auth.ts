@@ -6,6 +6,7 @@ import { compare } from "./lib/encrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
+// import FacebookProvider from "next-auth/providers/facebook";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -20,6 +21,13 @@ const GITHUB_SECRET = process.env.GITHUB_SECRET;
 if (!GITHUB_CLIENT_ID || !GITHUB_SECRET) {
   throw new Error("Missing GitHub OAuth Credentials");
 }
+
+// const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID;
+// const FACEBOOK_SECRET = process.env.FACEBOOK_SECRET;
+
+// if (!FACEBOOK_CLIENT_ID || !FACEBOOK_SECRET) {
+//   throw new Error("Missing GitHub OAuth Credentials");
+// }
 
 export const config = {
   providers: [
@@ -36,6 +44,10 @@ export const config = {
       clientId: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_SECRET,
     }),
+    // FacebookProvider({
+    //   clientId: process.env.FACEBOOK_CLIENT_ID,
+    //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    // }),
     CredentialsProvider({
       credentials: {
         email: { type: "email" },
